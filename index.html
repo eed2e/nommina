@@ -6,12 +6,12 @@
 
     <body>
         <div class="loginbox" method="POST">
-            <img src="avatar.png" class="avatar">
+            <img src="img/avatar.png" class="avatar">
             <h1>DigitalNet</h1>
-            <form action="login.php">
+            <form method="POST" name="formLogin" action="login.php" onsubmit="login(user,pass)">
                 <p>Usuario</p>
                 <input type="text" id="user" name="user" required>
-                <p>Contraseña</p>
+                <p>Password</p>
                 <input type="password" id="pass" name="pass" required>
                 <input type="submit" value="Entrar">
             </form>
