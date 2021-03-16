@@ -1,5 +1,5 @@
 <?php
-$usuario = "root";
+	$usuario = "root";
 	$password = "";
 	$servidor = "localhost";
 	$basededatos = "nomminas";
