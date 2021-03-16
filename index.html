@@ -1,19 +1,19 @@
 <html>
 
 <head>
-    <title>Login Form Design</title>
+    <title>Nomina DigitalNet</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <body>
-        <div class="loginbox" action="login.php" method="post">
+        <div class="loginbox" method="POST">
             <img src="avatar.png" class="avatar">
-            <h1>Iniciar secion</h1>
-            <form>
-                <p>Username</p>
-                <input type="text" name="user" placeholder="Enter Username">
-                <p>Password</p>
-                <input type="password" name="pass" placeholder="Enter Password">
-                <input type="submit" name="" value="Entrar">
+            <h1>DigitalNet</h1>
+            <form action="login.php">
+                <p>Usuario</p>
+                <input type="text" id="user" name="user" required>
+                <p>Contraseña</p>
+                <input type="password" id="pass" name="pass" required>
+                <input type="submit" value="Entrar">
             </form>
 
         </div>
