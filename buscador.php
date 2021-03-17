@@ -1,4 +1,5 @@
-<<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -15,8 +16,8 @@
 <body>
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-			<a class="navbar-brand text-monospace" href="#">BUSCADOR <i class="fas fa-search"></i></a>
-			<input class="form-control mr-sm-4" type="text" name="termino" id="termino" placeholder="Buscar..." aria-label="Search">
+			<a class="navbar-brand text-monospace" href="#">BUSCADOR DE PRODUCTOS <i class="fas fa-search"></i></a>
+			<input class="form-control mr-sm-4" type="text" name="termino" id="termino" placeholder="Digite el nombre del producto que desea buscar..." aria-label="Search">
 		</nav>	
 	</header>
 	<section class="content-area">
