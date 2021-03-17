@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-03-2021 a las 21:27:15
+-- Tiempo de generación: 17-03-2021 a las 19:25:29
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -30,26 +30,23 @@ SET time_zone = "+00:00";
 CREATE TABLE `empleados` (
   `Id_Empleado` int(10) NOT NULL,
   `Nombre` text NOT NULL,
-  `Apellido Materno` text NOT NULL,
-  `Apellido Paterno` text NOT NULL,
-  `Fecha de Ingreso` date NOT NULL,
-  `Fecha Egreso` date DEFAULT NULL,
+  `Apellido_Paterno` text NOT NULL,
+  `Apellido_Materno` text NOT NULL,
+  `Fecha_Ingreso` date NOT NULL,
+  `Fecha_Egreso` date DEFAULT NULL,
   `Sueldo` int(20) NOT NULL,
   `Departamento` varchar(20) NOT NULL,
-  `Frecuencia de pago` varchar(20) NOT NULL,
-  `Salario Diario` int(20) NOT NULL
+  `Frecuencia_pago` varchar(20) NOT NULL,
+  `Salario_Diario` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Volcado de datos para la tabla `empleados`
 --
 
-CREATE TABLE `usuarios` (
-  `Usuario` varchar(20) NOT NULL,
-  `Contraseña` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `empleados` (`Id_Empleado`, `Nombre`, `Apellido_Paterno`, `Apellido_Materno`, `Fecha_Ingreso`, `Fecha_Egreso`, `Sueldo`, `Departamento`, `Frecuencia_pago`, `Salario_Diario`) VALUES
+(1, 'Daniel', 'Lopez', 'Guerrero', '2021-03-10', NULL, 15000, 'Sistemas', 'Catorcenal', 300),
+(2, 'Juanito', 'Campos', 'Camacho', '2020-01-15', NULL, 15000, 'Sistemas', 'Catorcenal', 300);
 
 -- --------------------------------------------------------
 
@@ -76,12 +73,6 @@ ALTER TABLE `empleados`
   ADD PRIMARY KEY (`Id_Empleado`);
 
 --
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`Usuario`);
-
---
 -- Indices de la tabla `vacaciones`
 --
 ALTER TABLE `vacaciones`
@@ -91,6 +82,12 @@ ALTER TABLE `vacaciones`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  MODIFY `Id_Empleado` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `vacaciones`
