@@ -1,12 +1,11 @@
-
 $(obtener_registros());
-function obtener_registros(empleados)
+function obtener_registros(productos)
 {
 	$.ajax({
 		url : 'busqueda.php',
 		type : 'POST',
 		dataType : 'html',
-		data : { empleados: empleados},
+		data : { productos: productos },
 	})
 	.done(function(resultado){
 		$("#tabla_resultados").html(resultado);

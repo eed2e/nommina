@@ -4,14 +4,12 @@ require_once "BD/conexion.php";
 $tabla="";
 $consulta=" SELECT * FROM empleados LIMIT 0";
 $termino= "";
-if(isset($_POST['empleados']))
+if(isset($_POST['productos']))
 {
-	$termino=$mysqli->real_escape_string($_POST['empleados']);
+	$termino=$mysqli->real_escape_string($_POST['productos']);
 	$consulta="SELECT * FROM empleados WHERE 
-	Nombre LIKE '%".$termino."%' OR
-	Apellido Paterno LIKE '%".$termino."%' OR
-	Apellido Materno LIKE '%".$termino."%' OR
-	Departamento LIKE '%".$termino."%'";
+	Id_Empleado LIKE '%".$termino."%' OR
+	Nombre LIKE '%".$termino."%'";
 }
 $consultaBD=$mysqli->query($consulta);
 if($consultaBD->num_rows>=1){
@@ -32,14 +30,14 @@ if($consultaBD->num_rows>=1){
 	<tbody>";
 	while($fila=$consultaBD->fetch_array(MYSQLI_ASSOC)){
 		echo "<tr>
-		<td>".$fila['unidad_medida']."</td>	
-		<td>".$fila['nombre_producto']."</td>
-		<td>".$fila['codigo_barra']."</td>
-		<td>$ ".$fila['precio_costo']."</td>
-		<td>$ ".$fila['precio_A']."</td>
-		<td>$ ".$fila['precio_B']."</td>	
-		<td>$ ".$fila['precio_C']."</td>
-		<td>".$fila['marca']."</td>
+		<td>".$fila['Id_Empleado']."</td>	
+		<td>".$fila['Nombre']."</td>
+		<td>".$fila['Apellido Materno']."</td>
+		<td>$ ".$fila['Apellido Paterno']."</td>
+		<td>$ ".$fila['Sueldo']."</td>
+		<td>$ ".$fila['Departamento']."</td>	
+		<td>$ ".$fila['Frecuencia de pago']."</td>
+		<td>".$fila['Salario Diario']."</td>
 		</tr>";
 	}
 	echo "</tbody>
