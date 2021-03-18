@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-03-2021 a las 18:24:33
+-- Tiempo de generación: 18-03-2021 a las 21:27:16
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -30,6 +30,41 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_EmpleadoBuscar` (`prmTextoBusc
  select e.Id_Empleados, e.Nombre, e.Apellido_Paterno, e.Apellido_Materno, e.Fecha_Ingreso, e.fecha_Egreso, e.Sueldo, e. Departamento, e.Frecuencia_pago, e.Salario_Diario
     from empleados e
     where concat(e.Id_Empleados,' ', e.Nombre) like concat('%', prmTextoBuscar, '%');
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_EmpleadoEliminar` (`prmIdEmpleado` INT)  begin
+ delete
+    from productos 
+    where Id_Empleado=prmIdProducto;
+    select prmIdProducto;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_EmpleadoGrabar` (`prmIdEmpleado` INT, `prmNombre` NVARCHAR(50), `prmApellidoPaterno` NVARCHAR(100), `prmApellidoMaterno` NVARCHAR(100), `prmFechaIngreso` NVARCHAR(100))  begin
+ if (prmIdEmpleado = 0) then
+  begin
+   if exists(select 1 from empleados where Id_Empleado = prmIdEmpleado) then
+    signal sqlstate '45000' set message_text = 'Ya existe otro producto con el mismo codigo de barras';
+   end if;
+   /*Insertar registro*/
+   insert into empleados(Id_Empleado, Nombre, Apellido_Paterno, Apellido_Materno, Fecha_Ingreso) 
+            values(prmIdEmpleado,prmNombre, prmApellidoPaterno, prmApellidoMaterno, prmFechaIngreso);
+            /*Obtener Id generado*/
+            /*set prmIdEmpleado = last_insert_id();*/
+
+  end;
+ else
+  begin
+   if exists(select 1 from empleados where Id_Empleado = prmIdEmpleado) then
+    signal sqlstate '45000' set message_text = 'Ya existe otro producto con el mismo codigo de barras';
+   end if;
+   update empleados set
+            Nombre = prmNombre,
+            Apellido_Paterno = prmApellidoPaterno,
+            Apellido_Materno = prmApellidoMaterno
+            where Id_Empleado = prmIdEmpleado;
+        end;
+    end if;
+    select prmIdEmpleado;
 end$$
 
 DELIMITER ;
