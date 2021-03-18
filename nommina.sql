@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-03-2021 a las 19:25:29
--- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 8.0.2
+-- Tiempo de generación: 18-03-2021 a las 18:24:33
+-- Versión del servidor: 10.4.8-MariaDB
+-- Versión de PHP: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,6 +21,18 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `nommina`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_EmpleadoBuscar` (`prmTextoBuscar` NVARCHAR(50))  begin
+ select e.Id_Empleados, e.Nombre, e.Apellido_Paterno, e.Apellido_Materno, e.Fecha_Ingreso, e.fecha_Egreso, e.Sueldo, e. Departamento, e.Frecuencia_pago, e.Salario_Diario
+    from empleados e
+    where concat(e.Id_Empleados,' ', e.Nombre) like concat('%', prmTextoBuscar, '%');
+end$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
