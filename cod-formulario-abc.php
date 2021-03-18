@@ -20,6 +20,7 @@ class Empleados {
     public $Apellido_Materno = 0;
     public $Fecha_Ingreso = 0;
 
+    function Buscar($textoBuscar) {
         $mysql = new Connection();
         $cnn = $mysql->getConnection();
         $retorno = array();
