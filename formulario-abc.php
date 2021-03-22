@@ -71,17 +71,54 @@ ini_set("display_errors", 1);
                         <label>Código del Empleado:</label>
                         <div class="form-group input-group">
 
-                            <input type="text" id="txtCodigoBarras" ng-model="producto.codigo_empleado" class="form-control" />
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                            <input type="text" id="txtCodigoEmpleado" ng-model="producto.codigo_empleado" class="form-control" />
+                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>-->
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Nombre del Empleado:</label>
+                
+                    <div class="col-sm-6">
+                        <label>Nombre del Empleado:</label>
+                        <div class="form-group">                          
                             <input type="text" id="txtNombreProducto" ng-model="producto.nombre" class="form-control" />
                         </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-sm-6">
+                        <label>Apellido Paterno:</label>
+                        <div class="form-group">
+                            
+                            <input type="text" id="txtNombreProducto" ng-model="producto.aPaterno" class="form-control" />
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-6">
+                        <label>Apellido Materno:</label>
+                        <div class="form-group">                            
+                            <input type="text" id="txtNombreProducto" ng-model="producto.aMaterno" class="form-control" />
+                        </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Fecha de ingreso:</label>
+                            <input type="text" id="txtNombreProducto" ng-model="producto.fechaIngreso" class="form-control" placeholder= "AAAA/MM/DD" />
+                        </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-sm-6">
+                        <label>Frecuencia de Pago:</label>
+                        <div class="form-group">
+                            
+                            <input type="text" id="txtNombreProducto" ng-model="producto.frecuenciaPago" class="form-control" />
+                        </div>
+
+                        <!--<div class="form-floating ">
+                            
+                            <select id="inputState" ng-model="producto.frecuenciaPago" class="form-select"  >
+                                <option >14</option>
+                                <option>6</option>
+                            </select>
+                        </div>-->
                     </div>
                 </div>
                 <div class="row">
@@ -89,14 +126,14 @@ ini_set("display_errors", 1);
                         <label>Salario Mensual:</label>
                         <div class="form-group input-group">
                             <input type="text" id="txtStock" ng-model="producto.sMensual" class="form-control" />
-                            <span class="input-group-addon">0.00</span>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label>Salario Diario:</label>
                         <div class="form-group input-group">
 
-                            <input type="text" id="txtStock" ng-model="producto.sDiario" class="form-control" />
+                            <input type="text" id="txtStock" ng-model="producto.sDiario" class="form-control" value= (p.sMensual/30.4) />
                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
                         </div>
                     </div>
@@ -112,8 +149,8 @@ ini_set("display_errors", 1);
 </div>
 <!-- Modal Producto -->
         <div class="container-fluid">
-            <h1 class = "text-center"> DigitalNet</h1>
-            <hr />
+        <div align="center"><img class="d-block mx-auto mb-4" src="logo_ok.jpg" alt="" width="900" height="200"></div>
+        <hr />
             <a href="#" class="btn btn-primary" ng-click="AbrirNuevo();"><i class="glyphicon glyphicon-plus"></i> Agregar Empleado</a>
             <br /><br />
             <div class ="row">
@@ -130,13 +167,17 @@ ini_set("display_errors", 1);
                 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th colspan="6" class="text-center">Listado de Empleados</th>
+            <th colspan="10" class="text-center">Listado de Empleados</th>
         </tr>
         <tr>
             <th class="text-center"><i class="glyphicon glyphicon-pencil"></i></th>
             <th class="text-center"><i class="glyphicon glyphicon-trash"></i></th>
             <th>Código del Empleado</th>
             <th>Nombre</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>fechaIngreso</th>
+            <th>frecuenciaPago</th>
             <th class="text-right">Suldo Mensual</th>
             <th class="text-right">Sueldo Diario</th>
         </tr>
@@ -147,7 +188,11 @@ ini_set("display_errors", 1);
             <td class="text-center"><a href="#" ng-click="AbrirEliminar(this.producto);" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i></a></td>
             <td>{{producto.codigo_empleado}}</td>
             <td>{{producto.nombre}}</td>
-            <td class="text-right">{{producto.sMensual|number:2}}</td>
+            <td>{{producto.aPaterno}}</td>
+            <td>{{producto.aMaterno}}</td>
+            <td>{{producto.fechaIngreso}}</td>
+            <td>{{producto.frecuenciaPago}}</td>
+            <td class="text-right">{{producto.sMensual| number:2}}</td>
             <td class="text-right">{{producto.sDiario| number:2}}</td>
         </tr>
     </tbody>
@@ -205,7 +250,7 @@ ini_set("display_errors", 1);
                     $("#modalProducto").modal();
                 };
                 $scope.AbrirNuevo = function () {
-                    $scope.producto = {id_producto: 0, codigo_barras: "", nombre_producto: "", stock: 0, precio_venta: 0};
+                    $scope.producto = {id_empleado: 0, codigo_empleado: "", nombre: "", aPaterno: "", aMaterno: "", fechaIngreso: "", frecuenciaPago: "", sMensual: 0, sDiario: 0};
                     $("#modalProducto").modal();
                 };
                 $scope.Grabar = function () {
@@ -223,7 +268,7 @@ ini_set("display_errors", 1);
                     });
                 };
                 var myData = {textoBuscar: ''};
-                $scope.producto = {id_producto: 0, codigo_barras: "", nombre_producto: "", stock: 0, precio_venta: 0};
+                $scope.producto = {id_empleado: 0, codigo_empleado: "", nombre: "", aPaterno: "", aMaterno: "", fechaIngreso: "", frecuenciaPago: "", sMensual: 0, sDiario: 0};
                 $http({
                     method: "POST",
                     url: 'cod-formulario-abc.php?functionToCall=buscar_producto',

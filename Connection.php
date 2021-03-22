@@ -4,7 +4,7 @@ ini_set('display_errors',1);
 class Connection{
     private $conn;
     public function __construct(){
-        $this->conn = new mysqli("127.0.0.1", "root", "", "nommina");
+        $this->conn = new mysqli("localhost", "root", "", "nommina");
     }
     
     public function getConnection(){

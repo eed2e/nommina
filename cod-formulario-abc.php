@@ -17,6 +17,10 @@ class Productos {
     public $id_empleado = 0;
     public $codigo_empleado = "";
     public $nombre = "";
+    public $aPaterno = "";
+    public $aMaterno = "";
+    public $fechaIngreso = "";
+    public $frecuenciaPago = 0;
     public $sMensual = 0;
     public $sDiario = 0;
 
@@ -53,7 +57,7 @@ class Productos {
         $cnn = $mysql->getConnection();
         $retorno = $this->ArrayMessage("0", "No se ha realizado ninguna acción.");
         $query = $cnn->prepare("call proc_ProductoGrabar (?,?,?,?,?)");
-        $query->bind_param("issdd", $this->id_empleado, $this->codigo_empleado, $this->nombre, $this->sMensual, $this->sDiario);
+        $query->bind_param("issdd", $this->id_empleado, $this->codigo_empleado, $this->nombre, $this->aPaterno, $this->aMaterno, $this->fechaIngreso, $this->frecuenciaPago, $this->sMensual, $this->sDiario);
         $query->execute();
         $query->store_result();
         if (mysqli_stmt_error($query) != "") {
@@ -87,13 +91,17 @@ class Productos {
         $query->execute();
         $producto = new Productos(); //Variable
         $query->bind_result(
-                $id_empleado, $codigo_empleado, $nombre, $sMensual, $sDiario
+                $id_empleado, $codigo_empleado, $nombre, $aPaterno, $aMaterno, $fechaIngreso, $frecuenciaPago, $sMensual, $sDiario
         );
         while ($query->fetch()) {
             $producto = new Productos();
             $producto->id_empleado = $id_empleado;
             $producto->codigo_empleado = $codigo_empleado;
             $producto->nombre = $nombre;
+            $producto->aPaterno = $aPaterno;
+            $producto->aMaterno = $aMaterno;
+            $producto->fechaIngreso = $fechaIngreso;
+            $producto->frecuenciaPago = $frecuenciaPago;
             $producto->sMensual = $sMensual;
             $producto->sDiario = $sDiario;
             array_push($retorno, $producto);
@@ -126,6 +134,10 @@ if (isset($_GET["functionToCall"]) && !empty($_GET["functionToCall"])) {
             $producto->id_empleado = $json_data->id_empleado;
             $producto->codigo_empleado = $json_data->codigo_empleado;
             $producto->nombre = $json_data->nombre;
+            $producto->aPaterno = $json_data->aPaterno;
+            $producto->aMaterno = $json_data->aMaterno;
+            $producto->fechaIngreso = $json_data->fechaIngreso;
+            $producto->frecuenciaPago = $json_data->frecuenciaPago;
             $producto->sMensual = $json_data->sMensual;
             $producto->sDiario = $json_data->sDiario;
             echo json_encode($producto->Grabar());
@@ -133,7 +145,7 @@ if (isset($_GET["functionToCall"]) && !empty($_GET["functionToCall"])) {
         
         case "eliminar_producto":
             $producto = new Productos();
-            echo json_encode($producto->Eliminar($json_data->id_producto));
+            echo json_encode($producto->Eliminar($json_data->id_empleado));
             break;
     }
 } 
