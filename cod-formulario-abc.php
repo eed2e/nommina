@@ -56,8 +56,8 @@ class Productos {
         $mysql = new Connection();
         $cnn = $mysql->getConnection();
         $retorno = $this->ArrayMessage("0", "No se ha realizado ninguna acción.");
-        $query = $cnn->prepare("call proc_ProductoGrabar (?,?,?,?,?)");
-        $query->bind_param("issdd", $this->id_empleado, $this->codigo_empleado, $this->nombre, $this->aPaterno, $this->aMaterno, $this->fechaIngreso, $this->frecuenciaPago, $this->sMensual, $this->sDiario);
+        $query = $cnn->prepare("call proc_ProductoGrabar (?,?,?,?,?,)");
+        $query->bind_param("issdd", $this->codigo_empleado, $this->nombre, $this->aPaterno, $this->aMaterno, $this->fechaIngreso, $this->frecuenciaPago, $this->sMensual, $this->sDiario);
         $query->execute();
         $query->store_result();
         if (mysqli_stmt_error($query) != "") {
